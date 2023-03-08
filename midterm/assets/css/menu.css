@@ -40,11 +40,18 @@ a:hover {
     text-decoration: underline;
 }
 
-p {
-    font-family: Lato;
-    font-weight: 700;
+h2 {
+    font-family: "Bree Serif";
+    font-weight: 300;
     font-size: 16px;
     color: black;
+}
+
+h4 {
+    font-family: "Bree Serif";
+    font-weight: 150;
+    font-size: 13px;
+    color: gray;
 }
 
 .headerwrapper {
@@ -54,15 +61,15 @@ p {
     justify-content: space-around;
     align-items: center;
 }
+
 .contentwrapper {
     display: flex;
-    gap: 50px;
     margin: 80px;
     margin-block: 60px;
     padding-left: 100px;
     padding-right: 100px;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 
     box-sizing: border-box;
@@ -75,9 +82,30 @@ p {
     margin: 200x;
 }
 
+.row1, .row2 {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#hotdog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#hotdogImg {
+    width: 256;
+    height: 172;
+}
+
 .leftImg, .rightImg {
     opacity: 1;
 }
+
 #rightImg1:hover, #rightImg2:hover, #rightImg3:hover, #grill:hover{
     opacity: 0.8;
 }
