@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Lexie Zhou</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/experience.css">
     <link href="https://fonts.googleapis.com/css2?family=Kite+One&display=swap" rel="stylesheet">
 </head>
     <body>
@@ -44,7 +45,29 @@
             <h1 id="title">About Me</h1>
             <p id="introduction">I am a junior at the University of Hong Kong majoring in computer science and minoring in finance. I am currently exchanging at Berkeley. </p>
             <p id="introduction">I grew up in a loving family in Zhejiang, China. I like to play the piano, the flute, and basketball. I also love photography and watching movies!</p>
-            <button onclick="location.href='https://docs.google.com/document/d/12OP8atA26SzMBOKqvunn6FwpOJbtEPnv/edit?usp=sharing&ouid=108575417411005010601&rtpof=true&sd=true'" type="button">Resume</button>
+            <a href="https://docs.google.com/document/d/12OP8atA26SzMBOKqvunn6FwpOJbtEPnv/edit" target="_blank">
+                <button id="resume_btn">Resume</button>
+            </a>
+        </section>
+
+        <section class="Experience">
+            <h1 id="title">Experience</h1>
+            <div class = "work_box">
+                <a href = "https://innowings.engg.hku.hk/apsap/" target = "_blank">
+                    <img src="assets/img/icon/link.png" class = "link">
+                </a>
+                <img src= "assets/img/logo/innowing_logo.jpeg" class = "company_logo">
+                <div class = "dividing-line"></div>
+                <div class = "description">
+                    <h4>AR Mobile Application Developer</h4>
+                    <h5>SIG – Engineering and Archaeology - Inno Wing - HKU</h5>
+                    <h6>Dec 2022 - Present</h6>
+                    <div class = "job_responsibility">
+                        <li id="job_description">Designed and manipulated AR 3D models of cultural heritage using ARCore for the AR mobile application project that innovates the interpretation of archaeological sites in Armenia using the virtual reconstruction method</li>
+                        <li id="job_description">Developed Android Augmented Reality Mobile Apps’ frontend and backend services using Android Studio by Java</li>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </body>
