@@ -1,0 +1,89 @@
+.uni_boxes {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.uni_box {
+    width: 1200px;
+    height: 180px;
+    padding: 20px;
+    background-color: #DFDFED;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+}
+.uni_box:hover {
+    box-shadow: 0 0 10px #909090;
+}
+.uni_logo {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    left: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.edu-dividing-line{
+    width: 3px;
+    height: 100px;
+    background-color: #A69696;
+    position:relative;
+    left: 100px;
+}
+.edu_description {
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 150px;
+    width: 800px;
+}
+.link {
+    width: 32px;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+    right: 30px;
+    z-index: 1;
+    opacity: 0.25;
+}
+.link:hover {
+    opacity: 1;
+}
+
+h4 {
+    margin: 0px;
+    font-weight: 600;
+    font-size: 16pt;
+}
+
+h5 {
+    margin: 0px;
+    font-weight: 400;
+    font-size: 11pt;
+}
+
+h6 {
+    margin: 0px;
+    font-weight: 400;
+    font-size: 10pt;
+    color: #909090;
+}
+
+.job-responsibility {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#job_description {
+    width: 95%;
+    font-weight: 400;
+    font-size: 11pt;
+    margin: 0px;
+}

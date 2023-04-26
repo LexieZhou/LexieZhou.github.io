@@ -9,7 +9,7 @@ html, body {
 /* The navigation bar */
 .navbar {
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
 }
@@ -51,7 +51,7 @@ html, body {
     position: absolute;
     font-size: 40pt;
     left: 18%;
-    top: 20%;
+    top: 29%;
     transform: translateY(-50%);
 }
 .homepage #intro-text2 {
@@ -61,7 +61,7 @@ html, body {
     position: absolute;
     font-size: 40pt;
     left: 18%;
-    top: 32%;
+    top: 39%;
     transform: translateY(-50%);
 }
 .homepage #intro-text3 {
@@ -71,7 +71,7 @@ html, body {
     position: absolute;
     font-size: 15pt;
     left: 18%;
-    top: 42%;
+    top: 49%;
     transform: translateY(-50%);
     overflow: hidden;
     white-space: nowrap;
@@ -97,7 +97,7 @@ html, body {
     align-items: center;
     position: absolute;
     left: 16%;
-    top: 50%;
+    top: 58%;
     padding-bottom: 10px;
 }
 .social-link {
@@ -111,6 +111,30 @@ html, body {
 #title {
     padding: 20px;
     font-size: 40px;
+}
+.arrow {
+    box-sizing: border-box;
+    height: 3vw;
+    width: 3vw;
+    border-style: solid;
+    border-color: #CCB5B5;
+    opacity: 0.55;
+    border-width: 0px 1px 1px 0px;
+    transform: rotate(45deg);
+    transition: border-width 150ms ease-in-out;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+}
+  
+.arrow:hover {
+    border-bottom-width: 4px;
+    border-right-width: 4px;
+}
+  
+.arrow_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* about me section */
@@ -147,6 +171,27 @@ html, body {
     vertical-align: baseline;
 }
 
-.resume_btn:hover {
+#resume_btn:hover {
   background-color: #DFDAFC;
+}
+
+/* footer */
+.footer1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCB5B58C;
+}
+.navigation_link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.navigation_link a {
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
