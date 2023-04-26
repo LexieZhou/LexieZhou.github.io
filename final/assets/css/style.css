@@ -78,6 +78,7 @@ html, body {
     margin: 0 auto;
     animation: typing 3.5s steps(40, end),
         blink-caret .75s step-end infinite;
+    animation-iteration-count: infinite;
 }
 @keyframes typing{
     from {width: 0%}
@@ -194,4 +195,7 @@ html, body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+}
+.navigation_link a:hover {
+    border-bottom: 1.5px solid black;
 }
