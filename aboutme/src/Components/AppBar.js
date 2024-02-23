@@ -6,15 +6,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Drawer from '@mui/material/Drawer';
+import myPhoto from '../Images/ME.jpg';
 
 const navItems = ['About', 'Experiences', 'Projects', 'Fun'];
+const drawerWidth = 300;
 
 function DrawerAppBar() {
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{background: '#5c6bc0'}}>
+      <AppBar position="fixed" component="nav" sx={{ background: '#5c6bc0', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <Typography
             variant="h6"
@@ -32,12 +35,27 @@ function DrawerAppBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box component="main" sx={{ p: 3 }}>
+
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
         <Toolbar />
-        <Typography>
-          Hello World!
+        <Box sx={{ overflow: 'auto' }}>
+          <img src={myPhoto} alt="My Picture" style={{ width: '250px', height: 'auto', marginTop: '50px', marginLeft: 'auto', marginRight: 'auto' }}/>
+        </Box>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <Typography paragraph>
+          Hello World
         </Typography>
       </Box>
+
     </Box>
   );
 }
