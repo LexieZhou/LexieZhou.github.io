@@ -13,9 +13,14 @@
     flex-direction: row;
     align-items: center;
 }
+@media (max-width: 800px) {
+    .content {
+        flex-direction: column;
+    }
+}
 .logo {
     width: 250px;
-    height: 160px;
+    height: auto;
     /* height: 80px; */
     /* position: relative; */
     /* left: 15px; */
