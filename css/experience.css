@@ -37,7 +37,10 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
+.title {
+    display: inline-flex;
+    align-items: center;
+}
 h4 {
     margin: 0px;
     font-weight: 600;
