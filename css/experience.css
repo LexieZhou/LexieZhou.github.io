@@ -1,17 +1,19 @@
 .work_box {
-    width: 90%;
-    min-width: 400px;
-    padding: 0px;
-    border-radius: 20px;
-    margin: 20px;
-    box-shadow: 0 0 10px #909090;
+  max-width: 980px;
+  width: 100%;
+  margin: 20px auto;
+  border-radius: 20px;
+  background: #fafafa; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 .content {
-    width: 90%;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  width: 90%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
 }
 @media (max-width: 800px) {
     .content {
@@ -19,23 +21,16 @@
     }
 }
 .logo {
-    width: 250px;
-    height: auto;
-    /* height: 80px; */
-    /* position: relative; */
-    /* left: 15px; */
-    margin-top: auto;
-    margin-bottom: auto;
+  width: 220px;
+  max-width: 40vw;
+  height: auto;
+  border-radius: 12px;
 }
 .description {
-    position: relative;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-    left: 40px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  margin: 0; 
+  flex: 1;
+  min-width: 0; 
+  overflow-wrap: anywhere;
 }
 .title {
     display: inline-flex;
@@ -59,16 +54,9 @@ h6 {
     font-size: 10pt;
 }
 
-.job-responsibility {
-    padding-top: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-#job_description {
-    width: 95%;
-    font-weight: 400;
-    font-size: 11pt;
-    margin: 5px;
+.job-description {
+  width: 95%;
+  font-weight: 400;
+  font-size: 11pt;
+  margin: 5px;
 }

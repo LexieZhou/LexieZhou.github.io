@@ -25,13 +25,13 @@ html {
 }
 
 
-font-family: 'Roboto Slab', serif;
-@font-face {
-	font-family: 'Roboto Slab';
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
 
-@font-face {
-	font-family: 'Roboto Slab';
+body {
+  font-family: 'Roboto Slab', serif;
+  color: #111;
+  background: #fafafa;
+  line-height: 1.65;
 }
 
 h1 {
@@ -131,11 +131,9 @@ ul.pubs > li{
 }
 
 .wrapper {
-	margin-top: 60px;
-	margin-left: 60px;
-	margin-right: 60px;
-    padding-bottom: 2cm;
-
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 24px 80px;
 }
 
 .posts-wrapper {
@@ -143,6 +141,7 @@ ul.pubs > li{
 	margin-left:auto;
 	margin-right:auto;
 }
+
 
 .question {
 	margin-left: 40px; 
@@ -152,9 +151,6 @@ ul.pubs > li{
 	border-style: solid solid solid solid;
  	height: 192px; width: 800px; overflow: auto;
  	font-size:0.8em;
-}
-
-.post {
 }
 
 
@@ -175,13 +171,9 @@ pre {
 	line-height:1.2em;
 	max-width: 950px;
 
-	whitewhite-space: pre-wrap;       /* css-3 */  
-	whitewhite-space: -pre-wrap;      /* Opera 4-6 */  
-	whitewhite-space: -o-pre-wrap;    /* Opera 7 */  
-	word-wrap: break-word;       /* Internet Explorer 5+ */  
-	whitewhite-space: -moz-pre-wrap;  /* Older Versions of Mozilla */  
+	white-space: pre-wrap;       /* css-3 */  
+	word-wrap: break-word;       /* Internet Explorer 5+ */
 }
-
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
