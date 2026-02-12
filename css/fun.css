@@ -13,7 +13,6 @@
     margin-right: auto;
 }
 .scroll-container {
-    border: 3px solid #ffff;
     overflow: auto;
     white-space: nowrap;
     padding: 10px;
