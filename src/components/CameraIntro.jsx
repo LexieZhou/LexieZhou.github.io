@@ -19,30 +19,20 @@ export default function CameraIntro({ onComplete }) {
 
   useEffect(() => {
     const run = async () => {
-      // ── Phase 1: Viewfinder expand (0–500ms) ──────────────────
-      await animate([
-        // corners fade in
-        ['[data-corner]', { opacity: 1 }, { duration: 0.1, at: 0 }],
-        // tl
-        ['[data-corner="tl"]', { top: '5vh', left: '5vw' },   { duration: 0.5, ease: [0.25, 0, 0, 1], at: 0 }],
-        // tr
-        ['[data-corner="tr"]', { top: '5vh', right: '5vw' },  { duration: 0.5, ease: [0.25, 0, 0, 1], at: 0 }],
-        // bl
-        ['[data-corner="bl"]', { bottom: '5vh', left: '5vw' }, { duration: 0.5, ease: [0.25, 0, 0, 1], at: 0 }],
-        // br
-        ['[data-corner="br"]', { bottom: '5vh', right: '5vw' }, { duration: 0.5, ease: [0.25, 0, 0, 1], at: 0 }],
-      ])
+      // ── Phase 1: Viewfinder fade in (0–400ms) ────────────────
+      await animate('[data-corner]', { opacity: 1 }, { duration: 0.4 })
 
       // ── Phase 2: AF scan & lock (500–1100ms) ──────────────────
-      await animate([
-        // AF box + labels appear
-        ['[data-af="box"]',        { opacity: 0.8 }, { duration: 0.2, at: 0 }],
-        ['[data-af="label-top"]',  { opacity: 0.8 }, { duration: 0.2, at: 0 }],
-        ['[data-af="label-bot"]',  { opacity: 0.8 }, { duration: 0.2, at: 0 }],
-        // scan line sweeps top → bottom
-        ['[data-scan]', { top: '15%', opacity: 1 }, { duration: 0, at: 0 }],
-        ['[data-scan]', { top: '85%' },             { duration: 0.4, ease: 'linear', at: 0 }],
-        ['[data-scan]', { opacity: 0 },             { duration: 0.15, at: 0.3 }],
+      // Fire AF box + labels + scan line in parallel, await the slowest
+      await Promise.all([
+        animate('[data-af="box"]',       { opacity: 0.8 }, { duration: 0.2 }),
+        animate('[data-af="label-top"]', { opacity: 0.8 }, { duration: 0.2 }),
+        animate('[data-af="label-bot"]', { opacity: 0.8 }, { duration: 0.2 }),
+        (async () => {
+          animate('[data-scan]', { top: '15%', opacity: 1 }, { duration: 0 })
+          await animate('[data-scan]', { top: '85%' }, { duration: 0.4, ease: 'linear' })
+          await animate('[data-scan]', { opacity: 0 }, { duration: 0.15 })
+        })(),
       ])
 
       // AF blink 5× (80ms on / 80ms off)
@@ -51,15 +41,15 @@ export default function CameraIntro({ onComplete }) {
         await animate('[data-af="box"]', { opacity: 0.9 }, { duration: 0.08 })
       }
       // lock: solid accent border
-      await animate('[data-af="box"]', { borderColor: '#c4ad8a', opacity: 1 }, { duration: 0.05 })
+      await animate('[data-af="box"]', { borderColor: '#ffffff', opacity: 1 }, { duration: 0.05 })
 
       // ── Phase 3: Shutter flash (1100–1350ms) ──────────────────
-      // VF elements out
-      await animate([
-        ['[data-corner]',       { opacity: 0 }, { duration: 0.08, at: 0 }],
-        ['[data-af="box"]',     { opacity: 0 }, { duration: 0.08, at: 0 }],
-        ['[data-af="label-top"]', { opacity: 0 }, { duration: 0.08, at: 0 }],
-        ['[data-af="label-bot"]', { opacity: 0 }, { duration: 0.08, at: 0 }],
+      // VF elements out — all at once
+      await Promise.all([
+        animate('[data-corner]',         { opacity: 0 }, { duration: 0.08 }),
+        animate('[data-af="box"]',       { opacity: 0 }, { duration: 0.08 }),
+        animate('[data-af="label-top"]', { opacity: 0 }, { duration: 0.08 }),
+        animate('[data-af="label-bot"]', { opacity: 0 }, { duration: 0.08 }),
       ])
       // white flash snap in
       await animate('[data-flash]', { opacity: 1 }, { duration: 0.06, ease: 'easeOut' })
@@ -82,7 +72,9 @@ export default function CameraIntro({ onComplete }) {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: '#0e0e0c',
+        background: 'rgba(14, 14, 12, 0.45)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -94,10 +86,10 @@ export default function CameraIntro({ onComplete }) {
 
         {/* Corner brackets */}
         {[
-          { id: 'tl', style: { top: '50%', left: '50%',  borderTop: '1.5px solid #c4ad8a', borderLeft:  '1.5px solid #c4ad8a' } },
-          { id: 'tr', style: { top: '50%', right: '50%', borderTop: '1.5px solid #c4ad8a', borderRight: '1.5px solid #c4ad8a' } },
-          { id: 'bl', style: { bottom: '50%', left: '50%',  borderBottom: '1.5px solid #c4ad8a', borderLeft:  '1.5px solid #c4ad8a' } },
-          { id: 'br', style: { bottom: '50%', right: '50%', borderBottom: '1.5px solid #c4ad8a', borderRight: '1.5px solid #c4ad8a' } },
+          { id: 'tl', style: { top: '5vh',    left: '5vw',  borderTop: '2px solid #ffffff', borderLeft:  '2px solid #ffffff' } },
+          { id: 'tr', style: { top: '5vh',    right: '5vw', borderTop: '2px solid #ffffff', borderRight: '2px solid #ffffff' } },
+          { id: 'bl', style: { bottom: '5vh', left: '5vw',  borderBottom: '2px solid #ffffff', borderLeft:  '2px solid #ffffff' } },
+          { id: 'br', style: { bottom: '5vh', right: '5vw', borderBottom: '2px solid #ffffff', borderRight: '2px solid #ffffff' } },
         ].map(({ id, style }) => (
           <div
             key={id}
@@ -123,7 +115,7 @@ export default function CameraIntro({ onComplete }) {
             top: '15%',
             height: '1px',
             opacity: 0,
-            background: 'linear-gradient(90deg, transparent 0%, rgba(196,173,138,0.5) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%)',
             willChange: 'transform, opacity',
           }}
         />
@@ -138,7 +130,7 @@ export default function CameraIntro({ onComplete }) {
             transform: 'translate(-50%, -50%)',
             width: '28px',
             height: '28px',
-            border: '1px solid rgba(196,173,138,0)',
+            border: '1px solid rgba(255,255,255,0)',
             opacity: 0,
             willChange: 'opacity',
           }}
@@ -155,7 +147,7 @@ export default function CameraIntro({ onComplete }) {
             fontFamily: "'DM Mono', monospace",
             fontSize: '9px',
             letterSpacing: '0.12em',
-            color: 'rgba(196,173,138,0.8)',
+            color: 'rgba(255,255,255,0.95)',
             whiteSpace: 'nowrap',
             opacity: 0,
           }}
@@ -172,7 +164,7 @@ export default function CameraIntro({ onComplete }) {
             fontFamily: "'DM Mono', monospace",
             fontSize: '9px',
             letterSpacing: '0.12em',
-            color: 'rgba(196,173,138,0.8)',
+            color: 'rgba(255,255,255,0.95)',
             whiteSpace: 'nowrap',
             opacity: 0,
           }}
@@ -207,7 +199,7 @@ export default function CameraIntro({ onComplete }) {
             cursor: 'pointer',
             fontFamily: "'DM Mono', monospace",
             fontSize: '10px',
-            color: 'rgba(196,173,138,0.4)',
+            color: 'rgba(255,255,255,0.35)',
             letterSpacing: '0.1em',
             padding: 0,
           }}

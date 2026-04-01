@@ -11,12 +11,12 @@ const letterVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
-function AnimatedName({ text }) {
+function AnimatedName({ text, play }) {
   return (
     <motion.span
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      animate={play ? 'visible' : 'hidden'}
       aria-label={text}
     >
       {text.split('').map((char, i) => (
@@ -33,13 +33,13 @@ function AnimatedName({ text }) {
   )
 }
 
-const fadeUp = (delay = 0) => ({
+const fadeUp = (play, delay = 0) => ({
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
+  animate: play ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
   transition: { duration: 0.5, ease: 'easeOut', delay },
 })
 
-export default function Hero() {
+export default function Hero({ introComplete }) {
   return (
     <section id="hero" className="pt-[60px]">
       <div className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-16 md:py-20">
@@ -52,19 +52,19 @@ export default function Hero() {
                 className="font-display leading-tight"
                 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)' }}
               >
-                <AnimatedName text="Zihan (Lexie) Zhou" />
+                <AnimatedName text="Zihan (Lexie) Zhou" play={introComplete} />
               </h1>
               <motion.span
                 className="font-body text-lg"
                 style={{ fontFamily: "'仿宋', serif", color: 'var(--text-muted)' }}
-                {...fadeUp(0.7)}
+                {...fadeUp(introComplete, 0.7)}
               >
                 周子涵
               </motion.span>
             </div>
 
             {/* Email + socials row */}
-            <motion.div className="flex items-center gap-4 mb-5" {...fadeUp(0.8)}>
+            <motion.div className="flex items-center gap-4 mb-5" {...fadeUp(introComplete, 0.8)}>
               <span className="font-mono text-sm" style={{ color: 'var(--text-muted)' }}>
                 zhzhou02 at gmail dot com
               </span>
@@ -95,7 +95,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Bio intro */}
-            <motion.div className="mb-5 space-y-2" {...fadeUp(0.85)}>
+            <motion.div className="mb-5 space-y-2" {...fadeUp(introComplete, 0.85)}>
               <p
                 className="font-body text-base leading-relaxed"
                 style={{ color: 'var(--text-secondary)' }}
@@ -121,7 +121,7 @@ export default function Hero() {
               </p>
             </motion.div>
 
-            <motion.div className="mb-6" {...fadeUp(0.9)}>
+            <motion.div className="mb-6" {...fadeUp(introComplete, 0.9)}>
               <span
                 className="inline-flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full"
                 style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
@@ -136,7 +136,7 @@ export default function Hero() {
           <motion.div
             className="flex-shrink-0 self-center md:self-start md:mt-4"
             initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={introComplete ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
           >
             <div className="photo-float">

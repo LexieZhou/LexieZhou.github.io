@@ -25,13 +25,11 @@ export default function App() {
         style={{
           backgroundColor: 'var(--bg-primary)',
           minHeight: '100vh',
-          opacity: introComplete ? 1 : 0,
-          transition: 'opacity 0.3s ease',
         }}
       >
         <Navbar isDark={isDark} toggleDark={() => setIsDark((d) => !d)} />
         <main>
-          <Hero />
+          <Hero introComplete={introComplete} />
           <News />
           <Publications />
           <Experience />

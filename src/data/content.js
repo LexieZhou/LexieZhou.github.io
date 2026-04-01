@@ -105,7 +105,7 @@ export const projects = [
       'A full-stack web app for tracking meaningful interactions with people you care about. Visualize your relationship graph, explore your memory map, and get smart reminders before connections fade. Won Best Creativity Award and Most Popular Award.',
   },
   {
-    title: 'Agentic RAG System for Code QA',
+    title: 'CodeRAG',
     tag: 'PayPal · 2025',
     category: 'AI / ML',
     image: '/img/projects/CodeRAG.png',
