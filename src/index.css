@@ -188,3 +188,69 @@ a:hover {
 .photo-float {
   animation: float 4s ease-in-out infinite;
 }
+
+/* ── Photo masonry grid ────────────────────────────────────── */
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  display: block;
+}
+
+.masonry-item img {
+  transition: transform 0.3s ease;
+}
+
+.masonry-item:hover img {
+  transform: scale(1.03);
+}
+
+.masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.masonry-item:hover .masonry-overlay {
+  opacity: 1;
+}
+
+.masonry-overlay span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.05em;
+}
+
+/* ── Leaflet overrides ─────────────────────────────────────── */
+.leaflet-popup-content-wrapper {
+  display: none; /* we use our own card, not leaflet popups */
+}
+
+.leaflet-container {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.leaflet-control-zoom a {
+  color: var(--text-secondary) !important;
+  background: var(--bg-primary) !important;
+  border-color: var(--border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  color: var(--text-primary) !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  background: rgba(255,255,255,0.7) !important;
+}

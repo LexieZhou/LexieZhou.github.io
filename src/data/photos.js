@@ -1,0 +1,32 @@
+export const photos = [
+  // ── Europe ────────────────────────────────────────────────
+  { src: '/img/fun/euro_austria.JPG',     location: 'Hallstatt, Austria',   region: 'Europe' },
+  { src: '/img/fun/euro_croatia.JPG',     location: 'Dubrovnik, Croatia',   region: 'Europe' },
+  { src: '/img/fun/euro_croatia_2.JPG',   location: 'Dubrovnik, Croatia',   region: 'Europe' },
+  { src: '/img/fun/euro_germany.JPG',     location: 'Munich, Germany',      region: 'Europe' },
+  { src: '/img/fun/euro_germany_2.JPG',   location: 'Munich, Germany',      region: 'Europe' },
+  { src: '/img/fun/euro_germany_3.JPG',   location: 'Munich, Germany',      region: 'Europe' },
+  { src: '/img/fun/euro_greece.JPG',      location: 'Santorini, Greece',    region: 'Europe' },
+  { src: '/img/fun/euro_greece_2.JPG',    location: 'Santorini, Greece',    region: 'Europe' },
+  { src: '/img/fun/euro_hungry.JPG',      location: 'Budapest, Hungary',    region: 'Europe' },
+  { src: '/img/fun/euro_spain.jpg',       location: 'Barcelona, Spain',     region: 'Europe' },
+  { src: '/img/fun/euro_switzerland.JPG', location: 'Swiss Alps',           region: 'Europe' },
+  // ── Asia ──────────────────────────────────────────────────
+  { src: '/img/fun/china_hangzhou.JPG',   location: 'Hangzhou, China',      region: 'Asia' },
+  { src: '/img/fun/china_harbin.jpg',     location: 'Harbin, China',        region: 'Asia' },
+  { src: '/img/fun/china_suzhou.JPG',     location: 'Suzhou, China',        region: 'Asia' },
+  { src: '/img/fun/china_suzhou_2.jpg',   location: 'Suzhou, China',        region: 'Asia' },
+  { src: '/img/fun/china_suzhou_3.jpg',   location: 'Suzhou, China',        region: 'Asia' },
+  { src: '/img/fun/china_xinjiang.jpg',   location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_2.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_3.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_4.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_5.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_6.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  { src: '/img/fun/china_xinjiang_7.JPG', location: 'Xinjiang, China',      region: 'Asia' },
+  // ── America ───────────────────────────────────────────────
+  { src: '/img/fun/usa_alska.JPG',        location: 'Alaska, USA',          region: 'America' },
+  { src: '/img/fun/usa_alska_2.JPG',      location: 'Alaska, USA',          region: 'America' },
+  { src: '/img/fun/usa_seattle.jpg',      location: 'Seattle, USA',         region: 'America' },
+  { src: '/img/fun/usa_seattle_2.JPG',    location: 'Seattle, USA',         region: 'America' },
+]

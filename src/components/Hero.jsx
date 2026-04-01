@@ -95,39 +95,40 @@ export default function Hero({ introComplete }) {
             </motion.div>
 
             {/* Bio intro */}
-            <motion.div className="mb-5 space-y-2" {...fadeUp(introComplete, 0.85)}>
-              <p
-                className="font-body text-base leading-relaxed"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                Hi, I am a MSCS student at{' '}
-                <a
-                  href="https://cse.ucsd.edu/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: 'var(--accent)' }}
+            <motion.div className="mb-5 space-y-3" {...fadeUp(introComplete, 0.85)}>
+              <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                I am Zihan, a MSCS student at{' '}
+                <a href="https://cse.ucsd.edu/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-light)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                >
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
                   University of California San Diego
+                </a>
+                . I am broadly interested in LLM Reasoning, Agentic AI, and Software Development.
+              </p>
+              <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                I received my bachelor's degree from the{' '}
+                <a href="https://www.cs.hku.hk/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-light)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
+                  University of Hong Kong
+                </a>
+                . Previously, I worked with Prof.{' '}
+                <a href="https://tianyi-zhang.github.io/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-light)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
+                  Tianyi Zhang
+                </a>
+                {' '}and Prof.{' '}
+                <a href="https://i.cs.hku.hk/~cwu/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-light)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
+                  Chuan Wu
                 </a>
                 .
               </p>
-              <p
-                className="font-body text-base leading-relaxed"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                I am broadly interested in LLM Reasoning, Agentic AI, and Software Development.
+              <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                I'm looking for 2026 SWE/MLE internship opportunities. Feel free to contact me if you have any relevant opportunities or suggestions.
               </p>
-            </motion.div>
-
-            <motion.div className="mb-6" {...fadeUp(introComplete, 0.9)}>
-              <span
-                className="inline-flex items-center gap-1.5 font-mono text-xs px-3 py-1.5 rounded-full"
-                style={{ backgroundColor: 'var(--accent-subtle)', color: 'var(--accent)' }}
-              >
-                <span>📍</span> Open to 2026 SWE/MLE Internships
-              </span>
             </motion.div>
 
           </div>
