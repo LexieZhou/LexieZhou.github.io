@@ -64,7 +64,7 @@ export default function Navbar({ isDark, toggleDark }) {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center px-6" style={navStyle}>
+      <nav className="fixed top-0 left-0 right-0 h-[60px] flex items-center px-6" style={{ ...navStyle, zIndex: 1001 }}>
         {/* Logo → home */}
         <Link
           to="/"
@@ -140,8 +140,8 @@ export default function Navbar({ isDark, toggleDark }) {
       {/* Mobile overlay */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 md:hidden"
-          style={{ backgroundColor: 'var(--bg-primary)' }}
+          className="fixed inset-0 flex flex-col items-center justify-center gap-8 md:hidden"
+          style={{ backgroundColor: 'var(--bg-primary)', zIndex: 1000 }}
         >
           {sectionLinks.map((link) => (
             <a
