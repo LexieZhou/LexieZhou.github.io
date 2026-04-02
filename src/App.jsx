@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useDarkMode } from './hooks/useDarkMode'
 import CameraIntro from './components/CameraIntro'
 import Navbar from './components/Navbar'
+import ScrollToTop from './components/ScrollToTop'
 import MainPage from './pages/MainPage'
 import FunPage from './pages/FunPage'
 
@@ -12,6 +13,7 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
 
   return (
     <>
+      <ScrollToTop />
       {isMain && !introComplete && (
         <CameraIntro onComplete={() => setIntroComplete(true)} />
       )}

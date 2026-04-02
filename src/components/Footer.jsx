@@ -1,4 +1,5 @@
 import { Github, Linkedin } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -34,15 +35,15 @@ export default function Footer() {
           >
             <Linkedin size={15} />
           </a>
-          <a
-            href="/fun"
+          <Link
+            to="/fun"
             className="font-mono text-xs transition-colors duration-150"
-            style={{ color: 'var(--text-muted)' }}
+            style={{ color: 'var(--text-muted)', textDecoration: 'none' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
           >
             ✦ Fun
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
