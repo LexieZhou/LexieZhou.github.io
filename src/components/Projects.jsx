@@ -81,7 +81,7 @@ function LinkIcon({ href, icon: Icon, label }) {
 }
 
 function ProjectCard({ project }) {
-  const hasLinks = project.github || project.paper || project.href
+  const hasLinks = project.github || project.paper || project.demo
 
   const inner = (
     <div className="project-card h-full flex flex-col">
@@ -118,8 +118,8 @@ function ProjectCard({ project }) {
             {project.paper && (
               <LinkIcon href={project.paper} icon={FileText} label={project.paperLabel || 'Paper'} />
             )}
-            {project.href && (
-              <LinkIcon href={project.href} icon={ExternalLink} label="Demo" />
+            {project.demo && (
+              <LinkIcon href={project.demo} icon={ExternalLink} label="Demo" />
             )}
           </div>
         )}

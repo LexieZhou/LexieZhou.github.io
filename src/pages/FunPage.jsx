@@ -81,7 +81,27 @@ export default function FunPage() {
               <div style={{
                 flex: 1, padding: '20px 24px', borderRadius: 8,
                 backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
+                position: 'relative',
               }}>
+                <a
+                  href="https://richku.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    position: 'absolute', top: 14, right: 14,
+                    fontFamily: "'DM Mono', monospace", fontSize: 10,
+                    padding: '3px 8px', borderRadius: 9999,
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-muted)',
+                    textDecoration: 'none',
+                    letterSpacing: '0.04em',
+                    transition: 'color 0.15s, border-color 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+                >
+                  richku.com ↗
+                </a>
                 <p style={{ fontSize: 24, marginBottom: 8 }}>🏛</p>
                 <p className="font-body font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
                   Rights & Interests Committee, HKU

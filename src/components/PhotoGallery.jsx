@@ -93,11 +93,28 @@ function navBtnStyle(side) {
 }
 
 // ── Gallery grid ─────────────────────────────────────────────────
+const MOBILE_PREVIEW = 4 // ~2 rows × 2 columns on mobile
+
 export default function PhotoGallery() {
   const [activeRegion, setActiveRegion] = useState('All')
   const [lightboxIndex, setLightboxIndex] = useState(null)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches
+  )
+  const [expanded, setExpanded] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  // Reset collapse when filter or mobile state changes
+  useEffect(() => { setExpanded(false) }, [activeRegion, isMobile])
 
   const filtered = activeRegion === 'All' ? photos : photos.filter((p) => p.region === activeRegion)
+  const visible = isMobile && !expanded ? filtered.slice(0, MOBILE_PREVIEW) : filtered
 
   const openLightbox = (index) => setLightboxIndex(index)
   const closeLightbox = () => setLightboxIndex(null)
@@ -137,10 +154,10 @@ export default function PhotoGallery() {
 
       {/* Masonry grid */}
       <div style={{
-        columns: '3 200px',
-        columnGap: '12px',
+        columns: '4 180px',
+        columnGap: '10px',
       }}>
-        {filtered.map((photo, i) => (
+        {visible.map((photo, i) => (
           <motion.div
             key={photo.src}
             layout
@@ -162,6 +179,24 @@ export default function PhotoGallery() {
           </motion.div>
         ))}
       </div>
+
+      {/* Mobile expand/collapse button */}
+      {isMobile && filtered.length > MOBILE_PREVIEW && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          style={{
+            display: 'block', width: '100%', marginTop: 12,
+            padding: '8px 0', borderRadius: 6,
+            border: '1px solid var(--border)',
+            backgroundColor: 'var(--bg-secondary)',
+            color: 'var(--text-secondary)',
+            fontFamily: "'DM Mono', monospace", fontSize: 11,
+            cursor: 'pointer', letterSpacing: '0.05em',
+          }}
+        >
+          {expanded ? `show less` : `show all ${filtered.length} photos`}
+        </button>
+      )}
 
       {/* Lightbox */}
       <AnimatePresence>

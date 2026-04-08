@@ -192,7 +192,7 @@ a:hover {
 /* ── Photo masonry grid ────────────────────────────────────── */
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;

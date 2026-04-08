@@ -97,7 +97,7 @@ export const projects = [
     tag: 'UCSD Creative Lab AI Hackathon · 2026',
     category: 'Full-Stack',
     image: '/img/projects/Orbit.png',
-    href: 'https://zhongjun-frank-fu.github.io/San-Diego-Creative-Lab-Website/',
+    demo: 'https://orbit-topaz-six.vercel.app/',
     github: 'https://github.com/LexieZhou/Orbit',
     paper: 'https://docs.google.com/presentation/d/1cYMQHt2GMwanb4vJCuu3yZgVp3sUWnM_uoONESgBMzw/edit?usp=sharing',
     paperLabel: 'Presentation',

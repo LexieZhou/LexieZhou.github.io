@@ -29,4 +29,8 @@ export const photos = [
   { src: '/img/fun/usa_alska_2.JPG',      location: 'Alaska, USA',          region: 'America' },
   { src: '/img/fun/usa_seattle.jpg',      location: 'Seattle, USA',         region: 'America' },
   { src: '/img/fun/usa_seattle_2.JPG',    location: 'Seattle, USA',         region: 'America' },
+  { src: '/img/fun/usa_lajolla_1.JPG',    location: 'La Jolla, USA',        region: 'America' },
+  { src: '/img/fun/usa_lajolla_2.JPG',    location: 'La Jolla, USA',        region: 'America' },
+  { src: '/img/fun/usa_lajolla_3.JPG',    location: 'La Jolla, USA',        region: 'America' },
+  { src: '/img/fun/usa_bigbearlake.JPG',  location: 'Big Bear Lake, USA',   region: 'America' },
 ]

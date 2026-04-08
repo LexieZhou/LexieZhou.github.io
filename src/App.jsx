@@ -15,7 +15,7 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
     <>
       <ScrollToTop />
       {isMain && !introComplete && (
-        <CameraIntro onComplete={() => setIntroComplete(true)} />
+        <CameraIntro onComplete={() => { localStorage.setItem('introSeen', 'true'); setIntroComplete(true) }} />
       )}
       <Navbar isDark={isDark} toggleDark={toggleDark} />
       <Routes>
@@ -28,7 +28,9 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
 
 export default function App() {
   const [isDark, setIsDark] = useDarkMode()
-  const [introComplete, setIntroComplete] = useState(false)
+  const [introComplete, setIntroComplete] = useState(
+    () => localStorage.getItem('introSeen') === 'true'
+  )
 
   return (
     <HashRouter>

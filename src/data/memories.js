@@ -249,6 +249,16 @@ export const memories = [
     coords: [32.7157, -117.1611],
     region: 'America',
     memory: 'UCSD — building the next chapter here. Sunny every single day. The Pacific Ocean at sunset from La Jolla is pretty hard to beat.',
+    photos: ['/img/fun/usa_lajolla_1.JPG', '/img/fun/usa_lajolla_2.JPG', '/img/fun/usa_lajolla_3.JPG'],
+  },
+  {
+    id: 'bigbearlake',
+    name: 'Big Bear Lake, USA',
+    flag: '🇺🇸',
+    coords: [34.2439, -116.9114],
+    region: 'America',
+    memory: 'A mountain escape in the San Bernardino mountains. Pine trees, a glassy lake, and cold air that makes you forget you\'re in Southern California.',
+    photos: ['/img/fun/usa_bigbearlake.JPG'],
   },
   {
     id: 'berkeley',
