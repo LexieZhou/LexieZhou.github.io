@@ -1,7 +1,5 @@
 # LexieZhou.github.io
 
-Personal portfolio site at [yichenzw.com](https://yichenzw.com), built with React + Vite.
-
 ## Local development
 
 ```bash
