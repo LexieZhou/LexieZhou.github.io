@@ -1,8 +1,12 @@
 export const news = [
   {
+    date: 'Apr 2026',
+    text: 'Won 2nd Place at the UCSD DataHacks 2026!',
+    highlight: true,
+  },
+  {
     date: 'Mar 2026',
     text: 'Won Best Creative Award & Most Popular Award at the UCSD Creative Lab AI Hackathon (Trae × Z.ai)!',
-    highlight: true,
   },
   {
     date: 'Apr 2025',
