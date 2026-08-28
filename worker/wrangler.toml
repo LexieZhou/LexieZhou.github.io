@@ -6,4 +6,4 @@ compatibility_date = "2024-11-01"
 #   npx wrangler kv namespace create VISITORS
 [[kv_namespaces]]
 binding = "VISITORS"
-id = "PASTE_KV_NAMESPACE_ID_HERE"
+id = "a39193e55cae4057ad519d136318fa5b"

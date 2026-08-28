@@ -170,4 +170,4 @@ export const skills = [
 
 // Endpoint for the self-hosted visitor map (see worker/README.md). Leave it as
 // an empty string to render the plate without a live counter.
-export const visitorApi = ''
+export const visitorApi = 'https://visitor-map.lexie-visitor-map.workers.dev/api/visitors'
