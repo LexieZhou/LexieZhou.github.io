@@ -167,3 +167,7 @@ export const skills = [
     items: ['Git', 'Docker', 'Figma', 'Firebase', 'PostgreSQL', 'MongoDB', 'Tableau', 'Unity', 'Xcode'],
   },
 ]
+
+// Endpoint for the self-hosted visitor map (see worker/README.md). Leave it as
+// an empty string to render the plate without a live counter.
+export const visitorApi = ''
