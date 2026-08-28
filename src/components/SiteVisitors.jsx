@@ -11,9 +11,12 @@ export default function SiteVisitors() {
 
     const script = document.createElement('script')
     script.type = 'text/javascript'
-    script.id = 'clustrmaps'
+    // ClustrMaps became MapMyVisitors; cdn.clustrmaps.com no longer resolves.
+    // The widget script looks itself up by id="mapmyvisitors" and injects the
+    // map right after its own <script> tag.
+    script.id = 'mapmyvisitors'
     script.src =
-      '//cdn.clustrmaps.com/map_v2.js?cl=4e53a3&w=300&t=tt&d=jXrCsSAQ5cxkeQ3lCox56aF4RFmd75evDhWXbEo3EbM&co=b5abc6&ct=442525&cmo=5583f2&cmn=49db49'
+      'https://mapmyvisitors.com/map.js?cl=4e53a3&w=300&t=tt&d=jXrCsSAQ5cxkeQ3lCox56aF4RFmd75evDhWXbEo3EbM&co=b5abc6&ct=442525&cmo=5583f2&cmn=49db49'
     containerRef.current.appendChild(script)
   }, [])
 

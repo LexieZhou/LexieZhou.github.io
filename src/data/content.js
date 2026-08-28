@@ -33,6 +33,13 @@ export const publications = [
 
 export const experience = [
   {
+    role: 'AI Engineer Intern',
+    company: 'Millennium Management LLC',
+    companyUrl: 'https://www.mlp.com/',
+    location: 'New York, USA',
+    dates: 'Jun 2026 – Aug 2026',
+  },
+  {
     role: 'Machine Learning Engineer Intern',
     company: 'PayPal',
     companyUrl: 'https://www.paypal.com/',
@@ -96,18 +103,6 @@ export const education = [
 ]
 
 export const projects = [
-  {
-    title: 'Orbit',
-    tag: 'UCSD Creative Lab AI Hackathon · 2026',
-    category: 'Full-Stack',
-    image: '/img/projects/Orbit.png',
-    demo: 'https://orbit-topaz-six.vercel.app/',
-    github: 'https://github.com/LexieZhou/Orbit',
-    paper: 'https://docs.google.com/presentation/d/1cYMQHt2GMwanb4vJCuu3yZgVp3sUWnM_uoONESgBMzw/edit?usp=sharing',
-    paperLabel: 'Presentation',
-    description:
-      'A full-stack web app for tracking meaningful interactions with people you care about. Visualize your relationship graph, explore your memory map, and get smart reminders before connections fade. Won Best Creativity Award and Most Popular Award.',
-  },
   {
     title: 'CodeRAG',
     tag: 'PayPal · 2025',
