@@ -71,20 +71,6 @@ export const experience = [
     note: 'Supervised by Prof. Tianyi Zhang',
     noteUrl: 'https://tianyi-zhang.github.io/',
   },
-  {
-    role: 'Full-Stack Developer',
-    company: 'SLR Lab, HKU',
-    companyUrl: 'https://slrlab.edu.hku.hk/',
-    location: 'Hong Kong',
-    dates: 'Oct 2022 – Nov 2022',
-  },
-  {
-    role: 'Data Analyst',
-    company: 'TVB',
-    companyUrl: 'https://www.tvb.com/',
-    location: 'Hong Kong',
-    dates: 'Jul 2022 – Aug 2022',
-  },
 ]
 
 export const education = [
@@ -92,7 +78,7 @@ export const education = [
     institution: 'University of California, San Diego',
     institutionUrl: 'https://cse.ucsd.edu/',
     degree: 'M.S. Computer Science and Engineering',
-    dates: 'Sep 2025 – Jun 2027',
+    dates: 'Sep 2025 – Mar 2027',
   },
   {
     institution: 'The University of Hong Kong',
@@ -155,12 +141,12 @@ export const projects = [
 
 export const skills = [
   {
-    label: 'Languages',
-    items: ['Python', 'JavaScript', 'Java', 'C/C++', 'Swift', 'SQL', 'React', 'Node.js', 'Express.js', 'Django'],
+    label: 'AI & ML',
+    items: ['PyTorch', 'vLLM', 'SGLang', 'LangChain', 'LangGraph', 'LlamaIndex', 'RAG', 'OpenAI API', 'Hugging Face', 'Prompt Engineering'],
   },
   {
-    label: 'AI & ML',
-    items: ['PyTorch', 'LangChain', 'LangGraph', 'LlamaIndex', 'RAG', 'OpenAI API', 'Hugging Face', 'Prompt Engineering'],
+    label: 'Languages',
+    items: ['Python', 'JavaScript', 'Java', 'C/C++', 'Swift', 'SQL', 'React', 'Node.js', 'Express.js', 'Django'],
   },
   {
     label: 'Tools',

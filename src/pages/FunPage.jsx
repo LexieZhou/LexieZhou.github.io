@@ -1,9 +1,5 @@
-import { lazy, Suspense } from 'react'
 import FadeInSection from '../components/FadeInSection'
 import PhotoGallery from '../components/PhotoGallery'
-
-// Lazy-load the map so Leaflet doesn't block initial render
-const MemoryMap = lazy(() => import('../components/MemoryMap'))
 
 export default function FunPage() {
   return (
@@ -19,35 +15,8 @@ export default function FunPage() {
               More about Zihan ⛵
             </h1>
             <p className="font-body text-base" style={{ color: 'var(--text-secondary)', maxWidth: 520 }}>
-              23+ countries, a piano, a flute, and too many unfinished travel journals.
+              I love music, traveling, photography, and exploring new things.
             </p>
-          </FadeInSection>
-        </section>
-
-        {/* ── Memory Map ─────────────────────────────────────── */}
-        <section className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-10">
-          <hr className="section-divider mb-10" />
-          <FadeInSection>
-            <div className="flex items-baseline gap-3 mb-2">
-              <h2 className="section-title" style={{ marginBottom: 0 }}>Memory Map</h2>
-              <span className="font-mono text-xs" style={{ color: 'var(--text-muted)' }}>
-                click a pin
-              </span>
-            </div>
-            <p className="font-body text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
-              Every place I've been — larger dots have photos and memories attached.
-            </p>
-            <Suspense fallback={
-              <div style={{
-                height: 480, borderRadius: 10, border: '1px solid var(--border)',
-                backgroundColor: 'var(--bg-secondary)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span className="font-mono text-xs" style={{ color: 'var(--text-muted)' }}>loading map…</span>
-              </div>
-            }>
-              <MemoryMap />
-            </Suspense>
           </FadeInSection>
         </section>
 

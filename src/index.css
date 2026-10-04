@@ -231,30 +231,6 @@ a:hover {
   letter-spacing: 0.05em;
 }
 
-/* ── Leaflet overrides ─────────────────────────────────────── */
-.leaflet-popup-content-wrapper {
-  display: none; /* we use our own card, not leaflet popups */
-}
-
-.leaflet-container {
-  font-family: 'DM Sans', sans-serif;
-}
-
-.leaflet-control-zoom a {
-  color: var(--text-secondary) !important;
-  background: var(--bg-primary) !important;
-  border-color: var(--border) !important;
-}
-
-.leaflet-control-zoom a:hover {
-  color: var(--text-primary) !important;
-}
-
-.leaflet-control-attribution {
-  font-size: 9px !important;
-  background: rgba(255,255,255,0.7) !important;
-}
-
 /* ── Visitor plate ─────────────────────────────────────────────
    The Site Visitors map is drawn as a halftone printing plate: a dot
    field of land on tinted stock, with visitors as struck beacons. */

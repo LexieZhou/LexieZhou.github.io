@@ -192,7 +192,14 @@ export default function SiteVisitors() {
     <section id="visitors" className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-12">
       <hr className="section-divider mb-10" />
       <FadeInSection>
-        <h2 className="section-title">Site Visitors</h2>
+        <div className="flex items-baseline gap-3">
+          <h2 className="section-title">Site Visitors</h2>
+          {status === 'ready' && (
+            <span className="font-mono text-xs" style={{ color: 'var(--text-muted)' }}>
+              {data.total.toLocaleString()} total visits
+            </span>
+          )}
+        </div>
 
         <div className="visitor-plate">
           <LandPlate className="visitor-plate-canvas" />

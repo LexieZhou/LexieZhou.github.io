@@ -7,7 +7,4 @@ export default defineConfig({
   build: {
     outDir: 'docs',
   },
-  optimizeDeps: {
-    include: ['leaflet', 'react-leaflet'],
-  },
 })

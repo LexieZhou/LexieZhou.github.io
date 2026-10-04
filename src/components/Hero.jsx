@@ -103,7 +103,7 @@ export default function Hero({ introComplete }) {
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
                   University of California San Diego
                 </a>
-                . I am broadly interested in LLM Reasoning, Agentic AI, and Software Development.
+                . I am interested in Agentic RL, LLM Reasoning, and AI applications.
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 I received my bachelor's degree from the{' '}
@@ -127,7 +127,7 @@ export default function Hero({ introComplete }) {
                 .
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                I'm looking for 2026 SWE/MLE internship opportunities. Feel free to contact me if you have any relevant opportunities or suggestions.
+                I'm looking for 2027 MLE new grad opportunities. Feel free to contact me if you have any relevant opportunities or suggestions.
               </p>
             </motion.div>
 
