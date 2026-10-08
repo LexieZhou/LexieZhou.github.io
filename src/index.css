@@ -189,46 +189,340 @@ a:hover {
   animation: float 4s ease-in-out infinite;
 }
 
-/* ── Photo masonry grid ────────────────────────────────────── */
-.masonry-item {
-  break-inside: avoid;
-  margin-bottom: 10px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  border-radius: 6px;
-  display: block;
+/* ── Film roll gallery ───────────────────────────────────────
+   Photos live on a strip of 35mm colour negative pulled out of a
+   canister. Frames start as negatives and develop when looked at. */
+.film {
+  --frame-h: 186px;
+  --frame-w: calc(var(--frame-h) * 2 / 3);
+  --cell-w: calc(var(--frame-w) + 12px);
+  --band-h: 28px;
+  --strip-h: calc(var(--frame-h) + var(--band-h) * 2);
+  --can-w: 78px;
+  --film-base: #C8783C;
+  --film-ink: rgba(72, 30, 6, 0.75);
+  /* Perforations: one hole per tile, four tiles per frame */
+  --perf-top: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 28' preserveAspectRatio='none'%3E%3Cpath fill-rule='evenodd' d='M0 0H32V28H0Z M10.5 4H21.5A2.5 2.5 0 0 1 24 6.5V11.5A2.5 2.5 0 0 1 21.5 14H10.5A2.5 2.5 0 0 1 8 11.5V6.5A2.5 2.5 0 0 1 10.5 4Z'/%3E%3C/svg%3E");
+  --perf-bottom: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 28' preserveAspectRatio='none'%3E%3Cpath fill-rule='evenodd' d='M0 0H32V28H0Z M10.5 14H21.5A2.5 2.5 0 0 1 24 16.5V21.5A2.5 2.5 0 0 1 21.5 24H10.5A2.5 2.5 0 0 1 8 21.5V16.5A2.5 2.5 0 0 1 10.5 14Z'/%3E%3C/svg%3E");
 }
 
-.masonry-item img {
-  transition: transform 0.3s ease;
+@media (max-width: 640px) {
+  .film {
+    --frame-h: 144px;
+    --band-h: 24px;
+    --can-w: 60px;
+  }
 }
 
-.masonry-item:hover img {
-  transform: scale(1.03);
-}
-
-.masonry-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
+/* Controls */
+.film-controls {
   display: flex;
-  align-items: flex-end;
-  padding: 10px 12px;
-  border-radius: 6px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-bottom: 14px;
 }
 
-.masonry-item:hover .masonry-overlay {
-  opacity: 1;
+.film-region {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: var(--accent-subtle);
+  color: var(--accent);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.masonry-overlay span {
+.film-region.is-active {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.film-count {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   font-family: 'DM Mono', monospace;
   font-size: 10px;
-  color: rgba(255,255,255,0.9);
-  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.film-count button {
+  font: inherit;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.film-region:focus-visible,
+.film-count button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Stage: the scroller runs the full width, the canister sits over its right end */
+.film-stage {
+  position: relative;
+}
+
+.film-scroller {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 0 14px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.film-scroller::-webkit-scrollbar { height: 4px; }
+.film-scroller::-webkit-scrollbar-track { background: transparent; }
+.film-scroller::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.film-scroller.is-dragging,
+.film-scroller.is-dragging .film-frame {
+  cursor: grabbing;
+}
+
+.film-track {
+  display: flex;
+  width: max-content;
+}
+
+/* Strip */
+.film-cell {
+  flex: 0 0 var(--cell-w);
+  display: flex;
+  flex-direction: column;
+}
+
+.film-band {
+  height: var(--band-h);
+  display: flex;
+  background: var(--film-base);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--film-ink);
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: calc(var(--cell-w) / 4) 100%;
+  mask-size: calc(var(--cell-w) / 4) 100%;
+}
+
+.film-band--top {
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 9px 2px;
+  -webkit-mask-image: var(--perf-top);
+  mask-image: var(--perf-top);
+}
+
+.film-band--bottom {
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3px 8px 0;
+  -webkit-mask-image: var(--perf-bottom);
+  mask-image: var(--perf-bottom);
+}
+
+.film-band--bottom span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.film-gate {
+  height: var(--frame-h);
+  padding: 0 6px;
+  background: var(--film-base);
+}
+
+/* The free end of the roll, cut into the usual tapered leader */
+.film-leader {
+  flex-basis: calc(var(--cell-w) * 1.4);
+  clip-path: polygon(100% 0, 64% 0, 56% 6%, 49% 22%, 42% 38%, 34% 46%, 10% 47%, 4% 49%, 1% 53%, 0 59%, 0 100%, 100% 100%);
+}
+
+/* Blank film that runs on into the canister */
+.film-tail {
+  flex-basis: calc(var(--can-w) + 22px);
+}
+
+/* Frames: a colour negative is the inverted image under an orange mask */
+.film-frame {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 1px;
+  overflow: hidden;
+  background: #3A2414;
+  cursor: zoom-in;
+}
+
+.film-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  filter: invert(1) saturate(0.75) contrast(0.85) brightness(1.08);
+  transition: filter 0.9s ease var(--delay, 0ms);
+}
+
+.film-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #E8964F;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+  pointer-events: none;
+  transition: opacity 0.9s ease var(--delay, 0ms);
+}
+
+.film-frame.is-developed img {
+  filter: invert(0) saturate(1) contrast(1) brightness(1);
+}
+
+.film-frame.is-developed::after {
+  opacity: 0;
+}
+
+.film-frame:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+/* Canister */
+.film-canister {
+  position: absolute;
+  right: 0;
+  top: calc(6px + var(--strip-h) / 2);
+  transform: translateY(calc(-50% - 5px));
+  width: var(--can-w);
+  height: calc(var(--strip-h) + 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.18));
+}
+
+.film-canister-hub {
+  width: 38%;
+  height: 10px;
+  border-radius: 2px 2px 0 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #6F6B66, #C9C5BE 35%, #8A8680 70%, #55524E);
+}
+
+.film-canister-cap {
+  width: 100%;
+  height: 9px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #5E5A55, #D6D2CB 30%, #9A968F 60%, #4A4743);
+}
+
+.film-canister-body {
+  position: relative;
+  flex: 1;
+  width: calc(100% - 8px);
+  background: linear-gradient(90deg, #15120F, #3A332D 22%, #2A2420 50%, #171310 78%, #0E0C0A);
+}
+
+/* Light-trap lip the film feeds through */
+.film-canister-lip {
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: calc(var(--strip-h) + 8px);
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(90deg, #0D0B0A, #2C2724 55%, #1A1715);
+  box-shadow: inset 2px 0 0 #3A2C24;
+}
+
+.film-canister-label {
+  position: absolute;
+  inset: 9% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  overflow: hidden;
+  color: #2A221C;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.32), rgba(255, 255, 255, 0.18) 28%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.4)),
+    #EDE4D0;
+}
+
+/* A stripe of film base across the label */
+.film-canister-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12%;
+  height: 9px;
+  background: var(--film-base);
+  opacity: 0.9;
+}
+
+.film-canister-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.film-canister-iso {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #A4561F;
+}
+
+.film-canister-exp {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .film-canister-name { font-size: 16px; }
+  .film-canister-label { gap: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-frame img,
+  .film-frame::after {
+    transition-duration: 0.2s;
+    transition-delay: 0ms;
+  }
 }
 
 /* ── Visitor plate ─────────────────────────────────────────────

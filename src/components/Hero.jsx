@@ -103,7 +103,7 @@ export default function Hero({ introComplete }) {
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--accent)')}>
                   University of California San Diego
                 </a>
-                . I am interested in Agentic RL, LLM Reasoning, and AI applications.
+                . I am interested in Agentic RL and AI Agents.
               </p>
               <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 I received my bachelor's degree from the{' '}
