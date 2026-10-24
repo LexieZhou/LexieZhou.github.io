@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg role="img" aria-label="A sleepy loaf cat whose tail forms a Z" viewBox="58 44 410 410" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(30 10)">
+<path d="M58 196 H112 L60 282 H140" fill="none" stroke="#2E2A3B" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M58 196 H112 L60 282 H140" fill="none" stroke="#FFCFAE" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="58" cy="196" r="13" fill="#F2A57E"></circle>
+<path d="M165 224 L178 158 L228 198 Z" fill="#FFCFAE" stroke="#2E2A3B" stroke-width="8" stroke-linejoin="round"></path>
+<path d="M335 224 L322 158 L272 198 Z" fill="#FFCFAE" stroke="#2E2A3B" stroke-width="8" stroke-linejoin="round"></path>
+<path d="M183 206 L188 178 L208 195 Z" fill="#FF9AAE" stroke="#FF9AAE" stroke-width="4" stroke-linejoin="round"></path>
+<path d="M317 206 L312 178 L292 195 Z" fill="#FF9AAE" stroke="#FF9AAE" stroke-width="4" stroke-linejoin="round"></path>
+<path d="M120 330 C120 230 170 185 250 185 C330 185 380 230 380 330 C380 352 365 362 345 362 H155 C135 362 120 352 120 330 Z" fill="#FFCFAE" stroke="#2E2A3B" stroke-width="8" stroke-linejoin="round"></path>
+<path d="M240 200 V214 M250 196 V214 M260 200 V214" fill="none" stroke="#F2A57E" stroke-width="7" stroke-linecap="round"></path>
+<path d="M190 268 Q205 282 220 268" fill="none" stroke="#2E2A3B" stroke-width="6" stroke-linecap="round"></path>
+<path d="M280 268 Q295 282 310 268" fill="none" stroke="#2E2A3B" stroke-width="6" stroke-linecap="round"></path>
+<ellipse cx="184" cy="294" rx="14" ry="8" fill="#FF9AAE" fill-opacity="0.8"></ellipse>
+<ellipse cx="316" cy="294" rx="14" ry="8" fill="#FF9AAE" fill-opacity="0.8"></ellipse>
+<path d="M243 283 H257 L250 291 Z" fill="#FF8FA3" stroke="#2E2A3B" stroke-width="3" stroke-linejoin="round"></path>
+<path d="M239 297 Q244 303 250 296 Q256 303 261 297" fill="none" stroke="#2E2A3B" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<ellipse cx="210" cy="360" rx="25" ry="15" fill="#FFCFAE" stroke="#2E2A3B" stroke-width="7"></ellipse>
+<ellipse cx="290" cy="360" rx="25" ry="15" fill="#FFCFAE" stroke="#2E2A3B" stroke-width="7"></ellipse>
+<path d="M378 136 H400 L378 160 H400" fill="none" stroke="#2E2A3B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M412 96 H427 L412 113 H427" fill="none" stroke="#2E2A3B" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</g>
+</svg>
