@@ -633,3 +633,135 @@ a:hover {
     opacity: 0.35;
   }
 }
+
+/* ── Nap cat ───────────────────────────────────────────────────
+   The favicon cat naps on the divider of the section being read.
+   A perch sits just before each divider; from md up it is sticky,
+   so the cat rides in the right gutter through long sections. */
+.cat-perch {
+  --cat-w: 52px;
+  position: relative;
+  height: 0;
+  z-index: 20;
+}
+
+.nap-cat {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: var(--cat-w);
+}
+
+@media (min-width: 768px) {
+  .cat-perch {
+    --cat-w: 56px;
+    position: sticky;
+    /* Cat's height is 0.73 of its width; keep its head just under the navbar. */
+    top: calc(72px + var(--cat-w) * 0.73);
+  }
+  .nap-cat {
+    right: calc(-1 * (var(--cat-w) + 6px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .cat-perch { --cat-w: 68px; }
+}
+
+.nap-cat-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nap-cat-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.nap-cat svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.nap-cat-zzz {
+  transition: opacity 0.3s ease;
+}
+.nap-cat svg:not([data-eyes="closed"]) .nap-cat-zzz {
+  opacity: 0;
+}
+.nap-cat-z {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: nap-cat-z 2.8s ease-in-out infinite;
+}
+.nap-cat-z-late {
+  animation-delay: 1.4s;
+}
+@keyframes nap-cat-z {
+  0%   { opacity: 0; transform: translate(-24px, 30px) scale(0.6); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(18px, -36px) scale(1.1); }
+}
+
+.nap-cat-ear {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.nap-cat svg[data-eyes="peek"][data-side="left"] .nap-cat-ear-left,
+.nap-cat svg[data-eyes="peek"][data-side="right"] .nap-cat-ear-right {
+  animation: nap-cat-twitch 0.45s ease-out;
+}
+@keyframes nap-cat-twitch {
+  30% { transform: rotate(-10deg); }
+  65% { transform: rotate(6deg); }
+}
+
+.nap-cat-heart {
+  position: absolute;
+  left: 54%;
+  top: 2%;
+  width: 14px;
+  color: #FF8FA3;
+  pointer-events: none;
+}
+.nap-cat-heart svg {
+  display: block;
+  width: 100%;
+}
+
+.nap-cat-tally {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  margin: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 9px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+}
+.dark .nap-cat-tally {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nap-cat-z {
+    animation: none;
+    opacity: 0.8;
+  }
+  .nap-cat-ear {
+    animation: none !important;
+  }
+}

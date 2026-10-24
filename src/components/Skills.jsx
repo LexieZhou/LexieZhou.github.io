@@ -1,9 +1,11 @@
 import FadeInSection from './FadeInSection'
 import { skills } from '../data/content'
+import { CatPerch } from './NapCat'
 
 export default function Skills() {
   return (
     <section id="skills" className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-12">
+      <CatPerch />
       <hr className="section-divider mb-10" />
       <FadeInSection>
         <h2 className="section-title">Skills</h2>

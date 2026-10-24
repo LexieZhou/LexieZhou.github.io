@@ -3,6 +3,7 @@ import { ExternalLink, Github, FileText } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import FadeInSection from './FadeInSection'
 import { projects } from '../data/content'
+import { CatPerch } from './NapCat'
 
 const CATEGORIES = ['All', 'AI / ML', 'Full-Stack', 'CV & AR']
 
@@ -139,6 +140,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-12">
+      <CatPerch />
       <hr className="section-divider mb-14" />
       <FadeInSection>
         <div className="flex items-center gap-4 flex-wrap mb-8">

@@ -7,8 +7,9 @@ import Projects from '../components/Projects'
 import Skills from '../components/Skills'
 import SiteVisitors from '../components/SiteVisitors'
 import Footer from '../components/Footer'
+import NapCat from '../components/NapCat'
 
-export default function MainPage({ introComplete }) {
+export default function MainPage({ introComplete, isDark }) {
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>
       <Hero introComplete={introComplete} />
@@ -20,6 +21,7 @@ export default function MainPage({ introComplete }) {
       <Skills />
       <SiteVisitors />
       <Footer />
+      {introComplete && <NapCat isDark={isDark} />}
     </div>
   )
 }

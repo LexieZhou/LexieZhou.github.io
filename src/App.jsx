@@ -19,7 +19,7 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
       )}
       <Navbar isDark={isDark} toggleDark={toggleDark} />
       <Routes>
-        <Route path="/" element={<MainPage introComplete={introComplete} />} />
+        <Route path="/" element={<MainPage introComplete={introComplete} isDark={isDark} />} />
         <Route path="/fun" element={<FunPage />} />
       </Routes>
     </>

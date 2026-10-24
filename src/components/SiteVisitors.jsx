@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import FadeInSection from './FadeInSection'
 import { visitorApi } from '../data/content'
 import { COLS, ROWS, decodeLandMask, project } from '../data/landmask'
+import { CatPerch } from './NapCat'
 
 // ── Helpers ──────────────────────────────────────────────────────
 
@@ -190,6 +191,7 @@ export default function SiteVisitors() {
 
   return (
     <section id="visitors" className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-12">
+      <CatPerch />
       <hr className="section-divider mb-10" />
       <FadeInSection>
         <div className="flex items-baseline gap-3">

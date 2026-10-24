@@ -1,9 +1,13 @@
 /**
  * Site visitor map — Cloudflare Worker backend.
  *
- * One endpoint, two jobs:
+ * Visitors, one endpoint with two jobs:
  *   GET /api/visitors            → the public aggregate, as JSON
  *   GET /api/visitors?record=1   → count this request first, then return it
+ *
+ * Pets for the nap cat, kept apart from the visitor tally:
+ *   GET  /api/pets               → { total, petters }
+ *   POST /api/pets  {n, first}   → add n pets (and one petter if first), then return it
  *
  * Cloudflare hands every request an approximate location in `request.cf`, so
  * there is no geo-IP service and no API key in play. Nothing that identifies a
@@ -17,6 +21,8 @@
  */
 
 const AGGREGATE_KEY = 'aggregate'
+const PETS_KEY = 'pets'
+const MAX_PETS_PER_REQUEST = 30
 const MAX_CITIES = 600
 const MAX_RECENT = 12
 
@@ -40,8 +46,17 @@ export default {
 
     if (request.method === 'OPTIONS') {
       return new Response(null, {
-        headers: { ...cors, 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Max-Age': '86400' },
+        headers: {
+          ...cors,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Max-Age': '86400',
+        },
       })
+    }
+
+    if (url.pathname === '/api/pets' && (request.method === 'GET' || request.method === 'POST')) {
+      return pets(request, env, cors)
     }
 
     if (request.method !== 'GET' || url.pathname !== '/api/visitors') {
@@ -64,6 +79,30 @@ export default {
       'Cache-Control': 'public, max-age=60',
     })
   },
+}
+
+/**
+ * Reads or bumps the pet tally. The page batches clicks, so one request may
+ * carry several pets; `first` is sent once per browser so `petters` counts
+ * people rather than clicks. Same single-key KV trade-off as the visitor map.
+ */
+async function pets(request, env, cors) {
+  let state = (await env.VISITORS.get(PETS_KEY, 'json')) || { total: 0, petters: 0 }
+
+  if (request.method === 'POST') {
+    // The page posts text/plain to stay a simple CORS request, so parse by hand.
+    const body = await request.json().catch(() => null)
+    const n = Math.min(MAX_PETS_PER_REQUEST, Math.max(0, Math.floor(Number(body?.n) || 0)))
+    if (n > 0) {
+      state = {
+        total: state.total + n,
+        petters: state.petters + (body.first === true ? 1 : 0),
+      }
+      await env.VISITORS.put(PETS_KEY, JSON.stringify(state))
+    }
+  }
+
+  return json(state, 200, { ...cors, 'Cache-Control': 'no-store' })
 }
 
 /** Pulls the coarse location Cloudflare attached to the request, if it is usable. */
