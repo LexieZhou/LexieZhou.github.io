@@ -6,8 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev      # Start dev server at http://localhost:5173
-npm run build    # Production build → dist/
-npm run preview  # Preview the dist/ build
+npm run build    # Production build → docs/
+npm run preview  # Preview the docs/ build
 ```
 
 ## Tech Stack
@@ -43,7 +43,17 @@ Projects renders as a 2-column grid on `md:` breakpoint, 1-column on mobile.
 
 ### Deployment
 
-Push to `main` — GitHub Pages serves from the root. The `CNAME` file maps `yichenzw.com`. For GitHub Pages with a custom domain at root, `vite.config.js` uses `base: '/'` and `outDir: 'dist'`. Configure GitHub Pages to serve from the `dist/` folder or use a deploy action.
+Push to `main` — GitHub Pages serves from the root. The `CNAME` file maps `yichenzw.com`. For GitHub Pages with a custom domain at root, `vite.config.js` uses `base: '/'` and `outDir: 'docs'`, and GitHub Pages serves the committed `docs/` folder.
+
+## Blog
+
+Routes `/blog` (index) and `/blog/:slug` (note), lazy-loaded so Markdown/KaTeX/search/graph code stays out of the main bundle.
+
+- Notes are `src/content/blog/<slug>.md`; the filename is the slug. Start from `src/content/blog/_template.md` — files starting with `_` are never loaded. Frontmatter: `title`, `date` (YYYY-MM-DD), `tags: [a, b]`, `summary`, optional `draft: true` (hidden in production builds).
+- Body supports GFM, `$inline$` / `$$block$$` math, fenced code with highlighting, and images from `public/img/blog/`.
+- `[[slug]]` or `[[slug|label]]` links to another note and adds a graph edge; links to notes that don't exist render as muted text.
+- `src/data/blog.js` loads and parses the notes and builds the search index (MiniSearch) and the knowledge graph (notes + `#tag` hubs).
+- Components live in `src/components/blog/`. The outline is read from the rendered `h2`/`h3` ids, and scrolls from JS because HashRouter owns the URL hash.
 
 ## Image assets
 

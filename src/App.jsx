@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useDarkMode } from './hooks/useDarkMode'
 import CameraIntro from './components/CameraIntro'
@@ -6,6 +6,11 @@ import Navbar from './components/Navbar'
 import ScrollToTop from './components/ScrollToTop'
 import MainPage from './pages/MainPage'
 import FunPage from './pages/FunPage'
+
+// Blog pulls in Markdown, KaTeX, search and graph libraries, so it loads on demand
+const BlogLayout = lazy(() => import('./components/blog/BlogLayout'))
+const BlogPage = lazy(() => import('./pages/BlogPage'))
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 
 function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
   const location = useLocation()
@@ -18,10 +23,16 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
         <CameraIntro onComplete={() => { localStorage.setItem('introSeen', 'true'); setIntroComplete(true) }} />
       )}
       <Navbar isDark={isDark} toggleDark={toggleDark} />
-      <Routes>
-        <Route path="/" element={<MainPage introComplete={introComplete} isDark={isDark} />} />
-        <Route path="/fun" element={<FunPage />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<MainPage introComplete={introComplete} isDark={isDark} />} />
+          <Route path="/fun" element={<FunPage />} />
+          <Route path="/blog" element={<BlogLayout />}>
+            <Route index element={<BlogPage />} />
+            <Route path=":slug" element={<BlogPostPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </>
   )
 }
