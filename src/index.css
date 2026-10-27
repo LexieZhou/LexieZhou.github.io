@@ -668,6 +668,19 @@ a:hover {
   .cat-perch { --cat-w: 68px; }
 }
 
+/* On the Fun page the cat naps on the top rail of the frame, near the right corner */
+.cat-perch.cat-perch--frame {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  width: var(--cat-w);
+  z-index: 5;
+}
+.cat-perch--frame .nap-cat {
+  right: 0;
+  bottom: -2px;
+}
+
 .nap-cat-button {
   display: block;
   width: 100%;
@@ -949,3 +962,449 @@ a:hover {
 .dark .hljs-title,
 .dark .hljs-title.function_,
 .dark .hljs-section  { color: #93B1D1; }
+
+/* ── Fun page: the shadow box ─────────────────────────────────
+   An oak frame with a linen backing; the stickers are mounted inside.
+   Sizes inside use cqw so the whole box scales with its width.
+   ─────────────────────────────────────────────────────────────── */
+.mat-wrap {
+  container-type: inline-size;
+  max-width: 1180px;
+  margin: 0 auto;
+  --rail: max(16px, 2.6cqw);
+  --oak: #B8864F;
+  --oak-light: #D3A874;
+  --oak-dark: #8C5F33;
+  --linen: #E8E2D5;
+  --weave: rgba(110, 90, 60, 0.07);
+  --linen-shade: rgba(90, 64, 30, 0.14);
+  --burst: #9C6A3A;
+  --die: #FBFAF6;
+}
+
+.dark .mat-wrap {
+  --oak: #5C3D27;
+  --oak-light: #7A5236;
+  --oak-dark: #3A2416;
+  --linen: #2B2A27;
+  --weave: rgba(255, 245, 225, 0.035);
+  --linen-shade: rgba(0, 0, 0, 0.35);
+  --burst: #E8C98F;
+  --die: #E9E5DC;
+}
+
+/* Rails: grain runs along each rail, with mitred corners on the sides */
+.frame {
+  --wood-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.003 0.22' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.17 0 0 0 0 0.06 0 0 0 1.4 -0.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --wood-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.22 0.003' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.17 0 0 0 0 0.06 0 0 0 1.4 -0.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  position: relative;
+  padding: var(--rail);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.18)),
+    var(--wood-h),
+    linear-gradient(90deg, var(--oak), var(--oak-light) 35%, var(--oak) 60%, var(--oak-light) 85%, var(--oak));
+  box-shadow:
+    0 2px 3px rgba(40, 26, 12, 0.25),
+    0 34px 50px -30px rgba(40, 26, 12, 0.6);
+}
+.frame::before,
+.frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--rail);
+  background:
+    var(--wood-v),
+    linear-gradient(180deg, var(--oak-light), var(--oak) 40%, var(--oak-light) 70%, var(--oak));
+  pointer-events: none;
+}
+.frame::before {
+  left: 0;
+  clip-path: polygon(0 0, 100% var(--rail), 100% calc(100% - var(--rail)), 0 100%);
+  box-shadow: inset 6px 0 6px -4px rgba(255, 255, 255, 0.25);
+}
+.frame::after {
+  right: 0;
+  clip-path: polygon(0 var(--rail), 100% 0, 100% 100%, 0 calc(100% - var(--rail)));
+  box-shadow: inset -6px 0 6px -4px rgba(0, 0, 0, 0.25);
+}
+
+/* Linen backing, set back into the frame */
+.mat {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--linen);
+  background-image:
+    radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, var(--linen-shade)),
+    repeating-linear-gradient(0deg, var(--weave) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, var(--weave) 0 1px, transparent 1px 3px);
+  box-shadow:
+    0 0 0 2px var(--oak-dark),
+    inset 0 12px 18px -8px rgba(40, 24, 8, 0.38),
+    inset 10px 0 14px -10px rgba(40, 24, 8, 0.25),
+    inset -10px 0 14px -10px rgba(40, 24, 8, 0.2),
+    inset 0 -4px 8px -6px rgba(40, 24, 8, 0.2);
+}
+
+/* Glass over the box: a faint reflection that sweeps across on hover */
+.mat-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.22) 46%, rgba(255, 255, 255, 0.06) 50%, transparent 58%) 130% 0 / 260% 100% no-repeat,
+    linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 40%);
+  transition: background-position 0s;
+}
+@media (hover: hover) {
+  .frame:hover .mat-glass {
+    background-position: -30% 0, 0 0;
+    transition: background-position 1.4s ease-out;
+  }
+}
+
+/* ── Stickers ── */
+.sticker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  transition: left 0.55s cubic-bezier(0.2, 0.9, 0.25, 1), top 0.55s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.sticker.is-dragging { transition: none; cursor: grabbing; }
+
+.sticker-body {
+  position: relative;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) drop-shadow(0 6px 8px rgba(0, 0, 0, 0.2));
+  transition: filter 0.2s ease;
+}
+.sticker-body.is-lifted {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.22)) drop-shadow(0 22px 22px rgba(0, 0, 0, 0.32));
+}
+.sticker:focus-visible .sticker-body {
+  outline: 2px solid #F2C14E;
+  outline-offset: 8px;
+  border-radius: 6px;
+}
+
+.sticker svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* Die-cut white border that follows the outline of the drawing */
+.diecut {
+  --d: max(3px, 0.4cqw);
+  filter:
+    drop-shadow(var(--d) 0 0 var(--die))
+    drop-shadow(calc(var(--d) * -1) 0 0 var(--die))
+    drop-shadow(0 var(--d) 0 var(--die))
+    drop-shadow(0 calc(var(--d) * -1) 0 var(--die));
+}
+
+[data-nodrag] { cursor: pointer; touch-action: none; }
+
+/* Masking tape with a label */
+.sticker-tape {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 0.4em);
+  transform: translateX(-50%) rotate(-2deg);
+  padding: 0.3em 1em;
+  white-space: nowrap;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: max(11px, 1cqw);
+  color: #3B3326;
+  background: rgba(241, 224, 172, 0.95);
+  clip-path: polygon(0 12%, 3% 0, 97% 4%, 100% 16%, 98% 50%, 100% 86%, 97% 100%, 3% 96%, 0 86%, 2% 50%);
+  pointer-events: none;
+}
+
+/* Piano */
+.piano-white { fill: #F7F4EC; stroke: #CFC8BA; stroke-width: 1; transition: fill 0.08s; }
+.piano-black { fill: #1A1715; transition: fill 0.08s; }
+.piano-key.is-down .piano-white { fill: #E0D5BE; }
+.piano-key.is-down .piano-black { fill: #4A413A; }
+.piano-key.is-down rect { transform: translateY(1.5px); }
+.piano-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  fill: #ABA397;
+  pointer-events: none;
+}
+@media (hover: none) { .piano-hint { display: none; } }
+
+/* Flute */
+.flute-pad { fill: #3E444A; transition: fill 0.1s; }
+.flute-hole.is-held .flute-pad { fill: #F2C14E; }
+.flute-air { opacity: 0; transition: opacity 0.15s; }
+.flute.is-playing .flute-air { opacity: 1; animation: flute-air 0.45s ease-in-out infinite alternate; }
+@keyframes flute-air { to { transform: translate(-3px, -1px); } }
+
+/* Snare */
+.snare-rim { cursor: pointer; }
+.snare-sticks { pointer-events: none; }
+.snare-ripple {
+  fill: none;
+  stroke: #A8322D;
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: snare-ripple 0.5s ease-out forwards;
+}
+@keyframes snare-ripple {
+  from { transform: scale(0.1); opacity: 0.8; }
+  to { transform: scale(1.4); opacity: 0; }
+}
+.snare-stick-a { transform-box: view-box; transform-origin: 186px 6px; }
+.snare-stick-a.is-swinging { animation: stick-swing 0.16s ease-out; }
+@keyframes stick-swing { 50% { transform: rotate(-10deg); } }
+
+/* Postage stamps */
+.stamp-wrap { position: relative; }
+.stamp--europe  { --ink: #3F5E8C; }
+.stamp--asia    { --ink: #A8432F; }
+.stamp--america { --ink: #8A6A1F; }
+
+.stamp {
+  --p: calc(var(--w) * 0.08cqw);
+  --perf:
+    radial-gradient(calc(var(--p) * 0.3) at 50% 50%, #0000 95%, #000) calc(var(--p) / -2) calc(var(--p) / -2) / var(--p) var(--p) round,
+    linear-gradient(#000 0 0) center / calc(100% - var(--p)) calc(100% - var(--p)) no-repeat;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--p) * 0.45);
+  padding: calc(var(--p) * 1.05);
+  background: #FBF8F0;
+  -webkit-mask: var(--perf);
+  mask: var(--perf);
+}
+.stamp-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: calc(var(--p) * 0.3) solid var(--ink);
+}
+.stamp-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.stamp-value {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 0.35em;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: max(9px, calc(var(--w) * 0.13cqw));
+  line-height: 1.35;
+  color: #FBF8F0;
+  background: var(--ink);
+}
+.stamp-city {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: max(9px, calc(var(--w) * 0.11cqw));
+  line-height: 1.1;
+  color: var(--ink);
+}
+.postmark {
+  position: absolute;
+  left: 22%;
+  top: -6%;
+  width: 88% !important;
+  color: rgba(38, 36, 50, 0.6);
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+.postmark-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 7px;
+  letter-spacing: 0.06em;
+  fill: currentColor;
+}
+
+/* RIC: turns over to the backing paper */
+.ric { position: relative; aspect-ratio: 300 / 215; perspective: 900px; }
+.ric-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  border-radius: 12% / 16%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.3, 1.25, 0.5, 1);
+}
+.ric-front {
+  align-items: center;
+  justify-content: center;
+  padding: 8% 10%;
+  background: var(--die);
+}
+.ric-front img { width: 100%; height: auto; pointer-events: none; }
+.ric-back {
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25em;
+  padding: 8% 10%;
+  color: #146B50;
+  background:
+    repeating-linear-gradient(-45deg, rgba(29, 165, 122, 0.06) 0 2px, transparent 2px 9px),
+    #F1F7F3;
+  transform: rotateY(180deg);
+}
+.ric.is-flipped .ric-front { transform: rotateY(-180deg); }
+.ric.is-flipped .ric-back { transform: rotateY(0deg); }
+.ric-title { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: max(10px, 0.95cqw); line-height: 1.25; }
+.ric-role { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: max(12px, 1.3cqw); color: #0F4F3B; }
+.ric-note { font-family: 'DM Sans', sans-serif; font-size: max(9px, 0.8cqw); line-height: 1.35; color: #3D6B5A; }
+.ric-link {
+  align-self: flex-start;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: max(10px, 0.85cqw);
+  color: #1DA57A;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@container (max-width: 640px) {
+  .ric-note { display: none; }
+}
+
+/* Notes floating off an instrument */
+.mat-burst {
+  position: absolute;
+  z-index: 200;
+  transform: translate(-50%, -50%);
+  font-size: max(16px, 1.8cqw);
+  color: var(--burst);
+  pointer-events: none;
+  animation: mat-burst 1s ease-out forwards;
+}
+@keyframes mat-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -260%) rotate(14deg) scale(1.1); }
+}
+
+.mat-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem 1rem;
+  margin-top: 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.mat-foot button {
+  padding: 0.35rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.mat-foot button:hover,
+.mat-foot button:focus-visible { border-color: var(--accent); }
+
+/* ── Prints from a stamp ── */
+.prints-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(24, 22, 19, 0.86);
+}
+.prints-table {
+  --stack-w: min(560px, calc(100vw - 2rem));
+  --stack-h: min(70vh, 640px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.prints-stack { position: relative; width: var(--stack-w); height: var(--stack-h); }
+.print {
+  position: absolute;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  padding: 12px 12px 0;
+  background: #FBFAF6;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
+  cursor: grab;
+  touch-action: pan-y;
+}
+.print img {
+  display: block;
+  max-width: calc(var(--stack-w) - 24px);
+  max-height: calc(var(--stack-h) - 60px);
+  object-fit: contain;
+  pointer-events: none;
+}
+.print figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 10px 2px 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #3B3326;
+}
+.print figcaption span + span {
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  color: #8A8172;
+}
+.prints-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+.prints-nav button,
+.prints-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+}
+.prints-close { position: absolute; top: 1.25rem; right: 1.25rem; }
+.prints-nav button:focus-visible,
+.prints-close:focus-visible { outline: 2px solid #F2C14E; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sticker,
+  .ric-face,
+  .frame:hover .mat-glass { transition: none; }
+  .flute.is-playing .flute-air { animation: none; }
+  .mat-burst { animation-duration: 0.6s; animation-name: mat-burst-fade; }
+}
+@keyframes mat-burst-fade { from { opacity: 1; } to { opacity: 0; } }

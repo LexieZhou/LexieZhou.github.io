@@ -21,8 +21,8 @@ const FUR = '#FFCFAE'
 const NEAR = 150 // px from the cat's centre that counts as "nearby"
 
 /** Drop one of these just before a section's divider to give the cat a place to nap. */
-export function CatPerch() {
-  return <div className="cat-perch" aria-hidden="true" />
+export function CatPerch({ className }) {
+  return <div className={className ? `cat-perch ${className}` : 'cat-perch'} aria-hidden="true" />
 }
 
 // ── Drawing ──────────────────────────────────────────────────────

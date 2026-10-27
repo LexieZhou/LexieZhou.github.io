@@ -26,7 +26,7 @@ function AppContent({ isDark, toggleDark, introComplete, setIntroComplete }) {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<MainPage introComplete={introComplete} isDark={isDark} />} />
-          <Route path="/fun" element={<FunPage />} />
+          <Route path="/fun" element={<FunPage isDark={isDark} />} />
           <Route path="/blog" element={<BlogLayout />}>
             <Route index element={<BlogPage />} />
             <Route path=":slug" element={<BlogPostPage />} />

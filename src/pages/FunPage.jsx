@@ -1,91 +1,24 @@
 import FadeInSection from '../components/FadeInSection'
-import PhotoGallery from '../components/PhotoGallery'
+import Board from '../components/board/Board'
+import NapCat from '../components/NapCat'
 
-export default function FunPage() {
+export default function FunPage({ isDark }) {
   return (
     <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>
-      <main>
-        {/* ── Header ─────────────────────────────────────────── */}
-        <section className="w-full px-6 sm:px-10 md:px-16 lg:px-24 pt-24 pb-10">
-          <FadeInSection>
-            <h1
-              className="font-display mb-3"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--text-primary)' }}
-            >
-              More about Zihan ⛵
-            </h1>
-            <p className="font-body text-base" style={{ color: 'var(--text-secondary)', maxWidth: 520 }}>
-              I love music, traveling, photography, and exploring new things.
-            </p>
-          </FadeInSection>
-        </section>
-
-        {/* ── Photo Gallery ──────────────────────────────────── */}
-        <section className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-10">
-          <hr className="section-divider mb-10" />
-          <FadeInSection>
-            <h2 className="section-title">Photos</h2>
-            <PhotoGallery />
-          </FadeInSection>
-        </section>
-
-        {/* ── About callouts ─────────────────────────────────── */}
-        <section className="w-full px-6 sm:px-10 md:px-16 lg:px-24 py-10">
-          <hr className="section-divider mb-10" />
-          <FadeInSection>
-            <h2 className="section-title">A few other things</h2>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div style={{
-                flex: 1, padding: '20px 24px', borderRadius: 8,
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-              }}>
-                <p style={{ fontSize: 24, marginBottom: 8 }}>🎵</p>
-                <p className="font-body font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
-                  Piano · Flute · Snare drum
-                </p>
-                <p className="font-body text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Started piano at 6. The flute was added for school band. The snare drum was a phase, but a fun one.
-                </p>
-              </div>
-              <div style={{
-                flex: 1, padding: '20px 24px', borderRadius: 8,
-                backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)',
-                position: 'relative',
-              }}>
-                <a
-                  href="https://richku.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    position: 'absolute', top: 14, right: 14,
-                    fontFamily: "'DM Mono', monospace", fontSize: 10,
-                    padding: '3px 8px', borderRadius: 9999,
-                    border: '1px solid var(--border)',
-                    color: 'var(--text-muted)',
-                    textDecoration: 'none',
-                    letterSpacing: '0.04em',
-                    transition: 'color 0.15s, border-color 0.15s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border)' }}
-                >
-                  richku.com ↗
-                </a>
-                <p style={{ fontSize: 24, marginBottom: 8 }}>🏛</p>
-                <p className="font-body font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>
-                  Rights & Interests Committee, HKU
-                </p>
-                <p className="font-body text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  Served as chairman of{' '}
-                  <a href="https://richku.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>
-                    RIC
-                  </a>{' '}
-                  in 2021–2022. Student advocacy, event organizing, and learning a lot about how to run things.
-                </p>
-              </div>
-            </div>
-          </FadeInSection>
-        </section>
+      <main className="w-full px-4 sm:px-10 md:px-16 lg:px-24 pt-24 pb-16">
+        <FadeInSection>
+          <h1
+            className="font-display mb-3"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--text-primary)' }}
+          >
+            More about Zihan
+          </h1>
+          <p className="font-body text-base mb-12" style={{ color: 'var(--text-secondary)', maxWidth: 520 }}>
+            I love music, traveling, photography, and exploring new things.
+          </p>
+        </FadeInSection>
+        <Board />
+        <NapCat isDark={isDark} />
       </main>
     </div>
   )
