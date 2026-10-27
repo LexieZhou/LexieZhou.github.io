@@ -126,9 +126,6 @@ export default function Hero({ introComplete }) {
                 </a>
                 .
               </p>
-              <p className="font-body text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                I'm looking for 2027 MLE new grad opportunities. Feel free to contact me if you have any relevant opportunities or suggestions.
-              </p>
             </motion.div>
 
           </div>
