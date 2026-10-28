@@ -151,3 +151,45 @@ export function playSnare({ rim = false } = {}) {
   body.start(t)
   body.stop(t + 0.15)
 }
+
+// ── Rackets: a different contact sound for each ball ─────────────
+export function playHit(kind) {
+  const ac = audio()
+  const t = ac.currentTime
+
+  const burst = (filterType, freq, q, gain, decay) => {
+    const src = noise(ac)
+    const filter = ac.createBiquadFilter()
+    filter.type = filterType
+    filter.frequency.value = freq
+    filter.Q.value = q
+    const g = ac.createGain()
+    g.gain.setValueAtTime(gain, t)
+    g.gain.exponentialRampToValueAtTime(0.001, t + decay)
+    src.connect(filter).connect(g).connect(master)
+    src.start(t)
+    src.stop(t + decay + 0.02)
+  }
+  const tone = (type, from, to, gain, decay) => {
+    const o = ac.createOscillator()
+    o.type = type
+    o.frequency.setValueAtTime(from, t)
+    o.frequency.exponentialRampToValueAtTime(to, t + decay)
+    const g = ac.createGain()
+    g.gain.setValueAtTime(gain, t)
+    g.gain.exponentialRampToValueAtTime(0.001, t + decay)
+    o.connect(g).connect(master)
+    o.start(t)
+    o.stop(t + decay + 0.02)
+  }
+
+  if (kind === 'tennis') {
+    // A felt ball off taut strings: a round "pock"
+    burst('bandpass', 1100, 1.2, 0.7, 0.09)
+    tone('sine', 280, 170, 0.35, 0.08)
+  } else {
+    // A hollow plastic ball off a solid face: higher and drier
+    tone('sine', 1050, 720, 0.4, 0.05)
+    burst('bandpass', 2600, 3, 0.35, 0.04)
+  }
+}

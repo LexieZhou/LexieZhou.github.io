@@ -670,6 +670,7 @@ a:hover {
 
 /* On the Fun page the cat naps on the top rail of the frame, near the right corner */
 .cat-perch.cat-perch--frame {
+  --cat-w: 62px;
   position: absolute;
   top: 0;
   right: 5%;
@@ -679,6 +680,12 @@ a:hover {
 .cat-perch--frame .nap-cat {
   right: 0;
   bottom: -2px;
+}
+@media (min-width: 768px) {
+  .cat-perch.cat-perch--frame { --cat-w: 70px; }
+}
+@media (min-width: 1024px) {
+  .cat-perch.cat-perch--frame { --cat-w: 84px; }
 }
 
 .nap-cat-button {
@@ -1090,6 +1097,9 @@ a:hover {
 .sticker-body.is-lifted {
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.22)) drop-shadow(0 22px 22px rgba(0, 0, 0, 0.32));
 }
+/* A clear sticker barely casts a shadow, and what it casts would show through it */
+.sticker--clear .sticker-body { filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.12)); }
+.sticker--clear .sticker-body.is-lifted { filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.14)); }
 .sticker:focus-visible .sticker-body {
   outline: 2px solid #F2C14E;
   outline-offset: 8px;
@@ -1166,6 +1176,38 @@ a:hover {
 .snare-stick-a { transform-box: view-box; transform-origin: 186px 6px; }
 .snare-stick-a.is-swinging { animation: stick-swing 0.16s ease-out; }
 @keyframes stick-swing { 50% { transform: rotate(-10deg); } }
+
+/* Rackets: each one swings about the shared handle end, towards the side the ball goes */
+.racket-swing { transform-box: view-box; transform-origin: 150px 330px; }
+.racket-swing.is-swinging { animation: racket-swing 0.32s cubic-bezier(0.3, 0.7, 0.4, 1); }
+@keyframes racket-swing {
+  35% { transform: rotate(calc(var(--dir) * 18deg)); }
+  70% { transform: rotate(calc(var(--dir) * -5deg)); }
+}
+
+/* A ball in flight: the outer span carries it across, the inner one arcs and bounces */
+.mat-ball {
+  position: absolute;
+  z-index: 250;
+  width: max(14px, 2.2cqw);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: ball-across 0.95s linear forwards;
+}
+.mat-ball-arc { display: block; animation: ball-arc 0.95s forwards; }
+.mat-ball svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.25)); }
+@keyframes ball-across {
+  0% { transform: translate(-50%, -50%); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), -50%); opacity: 0; }
+}
+@keyframes ball-arc {
+  0% { transform: translateY(0); animation-timing-function: ease-out; }
+  40% { transform: translateY(calc(var(--h) * -1)); animation-timing-function: ease-in; }
+  78% { transform: translateY(var(--dy)); animation-timing-function: ease-out; }
+  88% { transform: translateY(calc(var(--dy) - 1.6cqw)); animation-timing-function: ease-in; }
+  100% { transform: translateY(var(--dy)); }
+}
 
 /* Postage stamps */
 .stamp-wrap { position: relative; }
@@ -1253,7 +1295,17 @@ a:hover {
   align-items: center;
   justify-content: center;
   padding: 8% 10%;
-  background: var(--die);
+  /* Clear vinyl: the linen shows through, with a bright edge and a little gloss */
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.35), transparent 45%),
+    rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.85);
+}
+.dark .ric-front {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 45%),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3);
 }
 .ric-front img { width: 100%; height: auto; pointer-events: none; }
 .ric-back {
@@ -1405,6 +1457,9 @@ a:hover {
   .ric-face,
   .frame:hover .mat-glass { transition: none; }
   .flute.is-playing .flute-air { animation: none; }
-  .mat-burst { animation-duration: 0.6s; animation-name: mat-burst-fade; }
+  .mat-burst,
+  .mat-ball { animation-duration: 0.6s; animation-name: mat-burst-fade; }
+  .mat-ball-arc,
+  .racket-swing.is-swinging { animation: none; }
 }
 @keyframes mat-burst-fade { from { opacity: 1; } to { opacity: 0; } }

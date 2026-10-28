@@ -8,6 +8,7 @@ import Flute from './Flute'
 import Snare from './Snare'
 import Stamp from './Stamp'
 import RicSticker from './RicSticker'
+import RacketPair, { Ball } from './Racket'
 import PrintStack from './PrintStack'
 import { CatPerch } from '../NapCat'
 
@@ -43,6 +44,7 @@ function saveMoved(layoutKey, moved) {
 }
 
 let burstId = 0
+let ballId = 0
 
 export default function Board() {
   const mobile = useMediaQuery('(max-width: 640px)')
@@ -58,6 +60,7 @@ export default function Board() {
   const [ricFlipped, setRicFlipped] = useState(false)
   const [openPlace, setOpenPlace] = useState(null)
   const [bursts, setBursts] = useState([])
+  const [balls, setBalls] = useState([])
 
   useEffect(() => { setMoved(loadMoved(layoutKey)) }, [layoutKey])
 
@@ -85,6 +88,22 @@ export default function Board() {
     const { x, y } = posRef.current(id)
     const jitter = (Math.random() - 0.5) * 6
     setBursts((b) => [...b.slice(-14), { id: burstId++, glyph, x: x + jitter, y: y - 4 }])
+  }
+
+  // A racket sends its ball off in an arc towards the middle of the board,
+  // starting from that racket's head (tennis on the left, paddle on the right)
+  const racketsDir = posOf('rackets').x < 50 ? 1 : -1
+  const launch = (kind) => {
+    const { x, y, w } = posRef.current('rackets')
+    const [ratioW, ratioH] = layout.aspect
+    const headUp = ((w * 0.35) / ((100 * ratioH) / ratioW)) * 100
+    const dir = x < 50 ? 1 : -1
+    setBalls((b) => [...b.slice(-6), {
+      id: ballId++, kind, dir,
+      x: x + (kind === 'tennis' ? -0.25 : 0.25) * w,
+      y: y - headUp,
+      dx: dir * (16 + Math.random() * 10), dy: 3 + Math.random() * 8, h: 7 + Math.random() * 6,
+    }])
   }
 
   const modalOpen = openPlace !== null
@@ -116,9 +135,15 @@ export default function Board() {
     },
     ric: {
       label: ricFlipped ? 'RIC sticker, turned over. Turn it back' : 'RIC sticker. Turn it over',
+      className: 'sticker--clear',
       onActivate: () => setRicFlipped((f) => !f),
       art: <RicSticker flipped={ricFlipped} />,
     },
+  }
+  stickers.rackets = {
+    label: 'Tennis racket and pickleball paddle. Hit a ball with either one',
+    onActivate: () => ping('rackets'),
+    art: <RacketPair dir={racketsDir} onHit={launch} ping={pings.rackets} />,
   }
   places.forEach((place, i) => {
     stickers[place.id] = {
@@ -166,6 +191,21 @@ export default function Board() {
               aria-hidden="true"
             >
               {b.glyph}
+            </span>
+          ))}
+
+          {balls.map((b) => (
+            <span
+              key={b.id}
+              className={`mat-ball mat-ball--${b.kind}`}
+              data-dir={b.dir}
+              style={{ left: `${b.x}%`, top: `${b.y}%`, '--dx': `${b.dx}cqw`, '--dy': `${b.dy}cqw`, '--h': `${b.h}cqw` }}
+              onAnimationEnd={(e) => {
+                if (e.target === e.currentTarget) setBalls((list) => list.filter((x) => x.id !== b.id))
+              }}
+              aria-hidden="true"
+            >
+              <span className="mat-ball-arc"><Ball kind={b.kind} /></span>
             </span>
           ))}
 
