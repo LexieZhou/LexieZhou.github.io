@@ -43,7 +43,7 @@ Projects renders as a 2-column grid on `md:` breakpoint, 1-column on mobile.
 
 ### Deployment
 
-Push to `main` — GitHub Pages serves from the root. The `CNAME` file maps `yichenzw.com`. For GitHub Pages with a custom domain at root, `vite.config.js` uses `base: '/'` and `outDir: 'docs'`, and GitHub Pages serves the committed `docs/` folder.
+Push to `main` — GitHub Pages serves the committed `docs/` folder at https://lexiezhou.github.io/ (no custom domain). `vite.config.js` uses `base: '/'` and `outDir: 'docs'`, so run `npm run build` and commit `docs/` before pushing. The `CNAME` file at the repo root is a leftover and is not served, since Pages publishes from `docs/`.
 
 ## Blog
 
