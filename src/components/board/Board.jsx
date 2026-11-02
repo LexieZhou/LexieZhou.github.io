@@ -12,7 +12,7 @@ import RacketPair, { Ball } from './Racket'
 import PrintStack from './PrintStack'
 import { CatPerch } from '../NapCat'
 
-const STORAGE_KEY = 'funBoard'
+const STORAGE_KEY = 'funBoard2'
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
